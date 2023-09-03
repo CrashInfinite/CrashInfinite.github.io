@@ -1,3 +1,76 @@
 <html>
-  <h1>This is a test</h1>
+
+  <body>
+
+    <button type="button" onclick="play_tone(1200.0, 2)">high Cut!</button>
+    <button type="button" onclick="play_tone(600.0, 2)">low Cut!</button>
+    <button type="button" onclick="play_tone(300.0, 2)">Coag!</button>
+    <button type="button" onclick="play_seal_success()">Seal Success!</button>
+    <button type="button" onclick="play_seal_failure()">Seal Failure!</button>
+    <button type="button" onclick="play_precoag()">precoag!</button>
+
+
+  </body>
+
+  <script>
+    function play_tone(freq, dur) {
+      var context = new AudioContext()
+      var o = context.createOscillator()
+      var g = context.createGain()
+      o.frequency.setValueAtTime(freq, context.currentTime); // value in hertz
+      o.type = 'square'
+      o.connect(g)
+      g.connect(context.destination)
+      o.start(0)
+      o.stop(dur)
+    }
+
+    function wait(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function play_success() {
+      play_tone(520.0, 0.1)
+      await wait(100);
+      play_tone(1160.0, 0.1)
+      await wait(100);
+      play_tone(2604.0, 0.1)
+    }
+
+    async function play_cut_success() {
+      play_tone(520.0, 0.1)
+      await wait(100);
+      play_tone(2604.0, 0.1)
+    }
+    
+    async function play_precoag() {
+      play_tone(300.0, 0.2)
+      await wait(200)
+      play_tone(1200.0, 2)
+      await wait(2000)
+      play_cut_success()
+    }
+    
+    async function play_failure() {
+      play_tone(217.0, 0.6)
+      await wait(800);
+      play_tone(217.0, 0.6)
+      await wait(800);
+      play_tone(217.0, 0.6)
+    }
+    
+    async function play_seal_success() {
+      play_tone(300.0, 3)
+      await wait(3200)
+      play_success()
+    }
+
+    async function play_seal_failure() {
+      play_tone(300.0, 3)
+      await wait(3200)
+      play_failure()
+    }
+
+  </script>
+
 </html>
