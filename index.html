@@ -91,21 +91,21 @@
     }
     
     async function play_failure() {
-      play_tone(217.0, 0.6)
+      play_tone(150.0, 0.6)
       await wait(800);
-      play_tone(217.0, 0.6)
+      play_tone(150.0, 0.6)
       await wait(800);
-      play_tone(217.0, 0.6)
+      play_tone(150.0, 0.6)
     }
     
     async function play_seal_success() {
-      play_tone(300.0, 3)
+      play_tone(200.0, 3)
       await wait(3200)
       play_success()
     }
 
     async function play_seal_failure() {
-      play_tone(300.0, 3)
+      play_tone(200.0, 3)
       await wait(3200)
       play_failure()
     }
