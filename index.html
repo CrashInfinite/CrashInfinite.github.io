@@ -23,6 +23,7 @@
       <button type="button" onclick="play_seal_failure()">Seal Failure!</button>
       <button type="button" onclick="play_precoag()">precoag!</button>
       <button type="button" onclick="play_precoag2()">precoag med cut coag 2!</button>
+      <button type="button" onclick="play_sync()">Sync!</button>
 
     <h2>
       Precoag duration = 200ms
@@ -79,6 +80,14 @@
       play_tone(900.0, 2)
       await wait(2000)
       play_cut_success()
+    }
+
+    async function play_sync() {
+      play_tone(200.0, 2)
+      await wait(2000)
+      play_tone(900.0, 1)
+      await wait(1000)
+      play_success()
     }
     
     async function play_failure() {
